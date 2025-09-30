@@ -357,6 +357,10 @@ tbody tr:hover {
   opacity: 0.85;
 }
 
+body.is-workout .footer {
+  display: none;
+}
+
 /* Print */
 @media print {
   body {
@@ -474,3 +478,4 @@ tbody tr:hover {
 [hidden] {
   display: none !important;
 }
+

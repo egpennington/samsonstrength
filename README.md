@@ -4,20 +4,20 @@
 A minimalist **progressive ladder workout timer** built as a **PWA (Progressive Web App)**.  
 Designed for strength and conditioning workouts that use ladder-style rep schemes (e.g., 1→10, 10→1, or 1→N→1 pyramid).  
 
-Try it out: [Live Demo](https://your-netlify-link-here) 🚀
+Try it out: [Live Demo](https://sampsonstrength.netlify.app) 🚀
 
 ---
 
 ## 📸 Screenshots
 
 ### Setup Screen (Mobile)
-![Setup Screen](screenshots/setup-mobile.png)
+![Setup Screen](images/setup-mobile.png)
 
 ### Workout In Progress
-![Workout Timer](screenshots/workout-timer.png)
+![Workout Timer](images/workout-timer.png)
 
 ### Workout Log
-![Workout Log](screenshots/workout-log.png)
+![Workout Log](images/workout-log.png)
 
 ---
 
@@ -105,5 +105,6 @@ This project is licensed under the MIT License.
 
 ---
 Built with ❤️ by [penningtonProgramming](https://emmettpennington.com)
+
 
 

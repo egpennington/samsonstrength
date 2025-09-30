@@ -332,6 +332,9 @@ tbody tr:hover {
   border-top: 1px solid rgba(0, 0, 0, 0.12);
   padding: 14px;
   z-index: 10;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 .footer a {
   color: inherit;
@@ -358,7 +361,8 @@ tbody tr:hover {
 }
 
 body.is-workout .footer {
-  display: none;
+  opacity: 0;
+  visibility: none;
 }
 
 /* Print */
@@ -478,4 +482,5 @@ body.is-workout .footer {
 [hidden] {
   display: none !important;
 }
+
 

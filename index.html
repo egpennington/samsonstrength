@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#0b0c10" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-title"
+      content="Sampson’s Strength Training"
+    />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <meta
+      name="description"
+      content="Sampson’s Strength Training is a ladder workout timer PWA. Track reps, manage rest intervals, and export workout logs offline or to PDF. Perfect for progressive strength workouts."
+    />
+    <meta name="author" content="penningtonProgramming / Emmett Pennington" />
+    <meta name="robots" content="index, follow" />
+    <meta
+      name="keywords"
+      content="workout timer, ladder workout, strength training, PWA fitness app, offline workout app, progressive reps, Sampson’s Strength Training, fitness, exercise tracker"
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Sampson’s Strength Training" />
+    <meta
+      property="og:description"
+      content="A ladder workout timer PWA with offline mode, PDF export, and rep tracking."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sampsonsstrengthtraining.com/" />
+    <meta
+      property="og:image"
+      content="https://sampsonstrength.com/logo.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Sampson’s Strength Training" />
+    <meta
+      name="twitter:description"
+      content="A ladder workout timer PWA with offline mode, PDF export, and rep tracking."
+    />
+    <meta
+      name="twitter:image"
+      content="https://sampsonstrength.com/images/images/logo.png"
+    />
+
+    <title>Sampson’s Strength Training • Ladder Method Workout</title>
+
+    <!-- Performance: fonts -->
+    <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin />
+    <link href="https://fonts.cdnfonts.com/css/gagalin" rel="stylesheet" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Icons + Manifest -->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link rel="icon" href="favicon.ico" />
+    <link rel="manifest" href="manifest.webmanifest" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://sampsonstrength.com/" />
+  </head>
+
+  <body>
+    <div class="app">
+      <header class="site-header" role="banner">
+        <div class="brand">
+          <img
+            src="./images/logoBD2.png"
+            class="brand-mark"
+            width="44"
+            height="44"
+            alt="Sampson's Strength Training logo: bulldog with barbell"
+            decoding="async"
+            loading="eager"
+          />
+          <div class="brand-text">
+            <h1 class="brand-title">
+              Sampson’s Strength <span class="brand-em">Training</span>
+            </h1>
+            <p class="brand-tag">Ladder workout timer • offline • PDF export</p>
+          </div>
+          <span class="pill">Workout Timer</span>
+        </div>
+
+        <nav class="header-actions" aria-label="Header actions">
+          <button id="exportBtn" class="btn btn-ghost" title="Save as PDF">
+            Export
+          </button>
+          <button id="fsBtn" class="btn btn-ghost" title="Fullscreen">
+            Fullscreen
+          </button>
+          <button id="themeBtn" class="btn btn-ghost" title="Toggle light/dark">
+            Light Mode
+          </button>
+        </nav>
+      </header>
+
+      <!-- Setup View -->
+      <section id="setupView" class="card setup">
+        <div class="row">
+          <div>
+            <label for="exercise">Exercise</label>
+            <input id="exercise" class="input" placeholder="Bench Press" />
+          </div>
+          <div>
+            <label for="targetReps">Target Ladder (Top Rep)</label>
+            <input
+              id="targetReps"
+              class="input"
+              type="number"
+              min="1"
+              value="10"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="restSeconds">Rest Between Sets (seconds)</label>
+            <input
+              id="restSeconds"
+              class="input"
+              type="number"
+              min="5"
+              step="5"
+              value="30"
+            />
+          </div>
+          <div>
+            <label for="ladderMode">Ladder Mode</label>
+            <select id="ladderMode" class="input">
+              <option value="asc" selected>Ascend (1 → N)</option>
+              <option value="desc">Descend (N → 1)</option>
+              <option value="pyr">Pyramid (1 → N → 1)</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="soundToggle">Sound</label>
+            <select id="soundToggle" class="input">
+              <option value="on" selected>Ding on</option>
+              <option value="off">Muted</option>
+            </select>
+          </div>
+          <div>
+            <label>&nbsp;</label>
+            <button id="beginBtn" class="btn btn-big" style="width: 100%">
+              Begin Workout
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Workout View -->
+      <section id="workoutView" class="card timers" hidden>
+        <div class="row" style="align-items: center">
+          <div style="font-size: 14px; color: var(--muted)">
+            Program:
+            <strong><span id="summaryExercise">Bench Press</span></strong> ·
+            Mode: <strong><span id="summaryMode">Ascend</span></strong> · Top:
+            <strong><span id="summaryTop">10</span></strong> · Rest:
+            <strong><span id="summaryRest">30s</span></strong>
+          </div>
+          <div style="text-align: right">
+            <button id="editBtn" class="btn btn-ghost">Edit Setup</button>
+          </div>
+        </div>
+
+        <div class="clocks">
+          <div class="clock">
+            <h3>Total Time</h3>
+            <div id="totalTime" class="value">00:00.0</div>
+          </div>
+          <div class="clock">
+            <h3>Rest Countdown</h3>
+            <div id="restCountdown" class="value">--:--</div>
+            <div
+              id="phaseLabel"
+              style="font-size: 12px; color: var(--muted)"
+              role="status"
+              aria-live="polite"
+            >
+              waiting…
+            </div>
+          </div>
+        </div>
+
+        <div class="status">
+          Current Set: <strong><span id="currentSet">1</span> rep</strong> ·
+          Effort: <strong><span id="effortTime">00.0s</span></strong> ·
+          Cumulative:
+          <strong><span id="cumulativeEffort">00:00.0</span></strong>
+        </div>
+
+        <div class="progress"><span id="progressFill"></span></div>
+        <div class="progress-caption">
+          <span id="progressLabel">0%</span
+          ><span id="planLabel">Plan: 0 sets</span>
+        </div>
+
+        <div class="work-buttons">
+          <button id="startBtn" class="btn">Start</button>
+          <button id="doneBtn" class="btn btn-ghost" disabled>Done</button>
+          <button id="pauseBtn" class="btn btn-ghost" disabled>Pause</button>
+          <button id="resetBtn" class="btn btn-danger">Reset</button>
+        </div>
+      </section>
+
+      <!-- Log -->
+      <section id="logView" class="card log" hidden>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 90px">Set</th>
+              <th>Reps</th>
+              <th>Effort Duration</th>
+              <th>At (workout time)</th>
+            </tr>
+          </thead>
+          <tbody id="logBody"></tbody>
+        </table>
+      </section>
+    </div>
+
+    <footer class="footer">
+      <a href="https://emmettpennington.com" target="_blank"
+        >&copy; 2025 The Ladder Method V0.1.0
+        <span class="sm-span">penningtonProgramming</span></a
+      >
+    </footer>
+    <script src="main.js"></script>
+  </body>
+</html>

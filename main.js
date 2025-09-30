@@ -357,7 +357,7 @@ function showSetup() {
 ui.startBtn.onclick = startWorkout
 ui.doneBtn.onclick = completeSet
 ui.pauseBtn.onclick = pauseResume
-ui.resetBtn.onclick = () => resetCore
+ui.resetBtn.onclick = () => resetCore()
 
 // Shortcuts (only on workout screen)
 window.addEventListener("keydown", (e) => {
@@ -388,4 +388,5 @@ if ('serviceWorker' in navigator) {
       .then(reg => console.log('SW registered:', reg.scope))
       .catch(err => console.error('SW registration failed:', err));
   });
+
 }

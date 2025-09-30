@@ -11,13 +11,13 @@ Try it out: [Live Demo](https://sampsonstrength.netlify.app) 🚀
 ## 📸 Screenshots
 
 ### Setup Screen (Mobile)
-![Setup Screen](images/setup-mobile.png)
+![Setup Screen](./images/setup-mobile.png)
 
 ### Workout In Progress
-![Workout Timer](images/workout-timer.png)
+![Workout Timer](./images/workout-timer.png)
 
 ### Workout Log
-![Workout Log](images/workout-log.png)
+![Workout Log](./images/workout-log.png)
 
 ---
 
@@ -105,6 +105,7 @@ This project is licensed under the MIT License.
 
 ---
 Built with ❤️ by [penningtonProgramming](https://emmettpennington.com)
+
 
 
 
